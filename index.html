@@ -1,0 +1,1143 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Fiche de recherche — Fleuriste &amp; décoratrice JMPP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Marcellus&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#3a2e28;
+    --ink-soft:#6b5c53;
+    --paper:#fdf8f4;
+    --paper-raised:#ffffff;
+    --card:#f6ede6;
+    --line:#e6d8cd;
+    --rose:#c98a9c;
+    --rose-deep:#a85f76;
+    --rose-tint:#f4e3e8;
+    --gold:#a98249;
+    --gold-tint:#efe0c2;
+    --blue:#8fa9ae;
+    --blue-tint:#e6eeee;
+    --shadow: 0 1px 2px rgba(58,46,40,.06), 0 8px 24px -12px rgba(58,46,40,.18);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ink:#f1e6dc;
+      --ink-soft:#c9b9ac;
+      --paper:#241c18;
+      --paper-raised:#2d2420;
+      --card:#2f2621;
+      --line:#4a3c33;
+      --rose:#e0a8b8;
+      --rose-deep:#eec2d0;
+      --rose-tint:#3a2a2e;
+      --gold:#d3b378;
+      --gold-tint:#3a3020;
+      --blue:#a9c4c8;
+      --blue-tint:#22302f;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.5);
+    }
+  }
+  :root[data-theme="dark"]{
+    --ink:#f1e6dc;
+    --ink-soft:#c9b9ac;
+    --paper:#241c18;
+    --paper-raised:#2d2420;
+    --card:#2f2621;
+    --line:#4a3c33;
+    --rose:#e0a8b8;
+    --rose-deep:#eec2d0;
+    --rose-tint:#3a2a2e;
+    --gold:#d3b378;
+    --gold-tint:#3a3020;
+    --blue:#a9c4c8;
+    --blue-tint:#22302f;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.5);
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',system-ui,-apple-system,sans-serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{ background:var(--rose); color:#fff; }
+
+  a{ color:var(--rose-deep); }
+
+  h1,h2,h3{
+    font-family:'Cormorant Garamond', Georgia, serif;
+    font-weight:600;
+    text-wrap:balance;
+    margin:0;
+    color:var(--ink);
+  }
+
+  .eyebrow{
+    font-family:'Inter',sans-serif;
+    font-size:.72rem;
+    font-weight:700;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--rose-deep);
+  }
+
+  .wrap{ max-width:920px; margin:0 auto; padding:0 24px 96px; }
+
+  /* ---------- HEADER ---------- */
+  header.hero{
+    position:relative;
+    padding:64px 24px 56px;
+    text-align:center;
+    background:
+      radial-gradient(600px 300px at 50% -10%, var(--rose-tint), transparent 70%),
+      var(--paper);
+    border-bottom:1px solid var(--line);
+  }
+  .seal{
+    width:min(90%, 360px);
+    margin:0 auto 20px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .seal img{ width:100%; height:auto; display:block; }
+  .seal .logo-dark{ display:none; }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]) .seal .logo-light{ display:none; }
+    :root:not([data-theme="light"]) .seal .logo-dark{ display:block; }
+  }
+  :root[data-theme="dark"] .seal .logo-light{ display:none; }
+  :root[data-theme="dark"] .seal .logo-dark{ display:block; }
+
+  .kicker{
+    font-family:'Marcellus', serif;
+    font-size:.85rem;
+    letter-spacing:.3em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:10px;
+  }
+  h1.title{
+    font-size:clamp(2.1rem, 5vw, 3.2rem);
+    line-height:1.08;
+  }
+  h1.title em{
+    font-style:italic;
+    color:var(--rose-deep);
+  }
+  .subtitle{
+    margin-top:14px;
+    font-size:1.05rem;
+    color:var(--ink-soft);
+    max-width:560px;
+    margin-left:auto; margin-right:auto;
+  }
+  .date-line{
+    margin-top:22px;
+    display:inline-flex;
+    gap:10px;
+    align-items:center;
+    font-family:'Marcellus', serif;
+    font-size:1rem;
+    color:var(--ink);
+    padding:9px 20px;
+    border:1px solid var(--gold);
+    border-radius:999px;
+    background:var(--gold-tint);
+  }
+  .date-line .sep{ color:var(--gold); opacity:.6; }
+  .email-line{
+    margin-top:14px;
+    font-size:.9rem;
+    color:var(--ink-soft);
+  }
+  .email-line strong{ color:var(--rose-deep); }
+
+  /* ---------- GALLERY ---------- */
+  .gallery{
+    display:grid;
+    grid-template-columns: 1.3fr 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap:10px;
+    margin:36px 0 8px;
+  }
+  .gallery figure{
+    margin:0; position:relative; border-radius:10px; overflow:hidden;
+    box-shadow:var(--shadow);
+    background:var(--card);
+  }
+  .gallery img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .gallery figcaption{
+    position:absolute; left:0; right:0; bottom:0;
+    padding:8px 12px 7px;
+    font-size:.7rem;
+    letter-spacing:.04em;
+    color:#fff;
+    background:linear-gradient(to top, rgba(20,14,10,.72), transparent);
+  }
+  .g-facade{ grid-column:1; grid-row:1 / span 2; aspect-ratio:3/4; }
+  .g-salle{ grid-column:2; grid-row:1; aspect-ratio:4/3; }
+  .g-jardin{ grid-column:3; grid-row:1; aspect-ratio:4/3; }
+  .g-ref{ grid-column:2 / span 2; grid-row:2; aspect-ratio:16/7; }
+
+  @media (max-width:640px){
+    .gallery{ grid-template-columns:1fr 1fr; }
+    .g-facade{ grid-column:1 / span 2; grid-row:1; aspect-ratio:16/9; }
+    .g-salle{ grid-column:1; grid-row:2; }
+    .g-jardin{ grid-column:2; grid-row:2; }
+    .g-ref{ grid-column:1 / span 2; grid-row:3; }
+  }
+
+  /* hero aerial shot */
+  .hero-shot{
+    margin:36px 0 8px;
+    position:relative;
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:var(--shadow);
+    aspect-ratio:16/8;
+    background:var(--card);
+  }
+  .hero-shot img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .hero-shot figcaption{
+    position:absolute; left:0; right:0; bottom:0;
+    padding:14px 18px 12px;
+    font-family:'Marcellus', serif;
+    font-size:.95rem;
+    letter-spacing:.03em;
+    color:#fff;
+    background:linear-gradient(to top, rgba(20,14,10,.75), transparent);
+  }
+  @media (max-width:640px){ .hero-shot{ aspect-ratio:4/3; } }
+
+  /* before / after pairs */
+  .before-after{
+    margin:22px 0 8px;
+  }
+  .before-after h3{
+    font-family:'Inter',sans-serif; font-weight:700; font-size:.78rem;
+    letter-spacing:.06em; text-transform:uppercase; color:var(--rose-deep);
+    margin-bottom:10px;
+  }
+  .ba-pair{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+  }
+  .ba-pair figure{
+    margin:0; position:relative; border-radius:10px; overflow:hidden;
+    box-shadow:var(--shadow);
+    background:var(--card);
+    aspect-ratio:4/3;
+  }
+  .ba-pair img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .ba-pair .ba-label{
+    position:absolute; top:10px; left:10px;
+    font-family:'Inter',sans-serif; font-weight:700; font-size:.64rem;
+    letter-spacing:.08em; text-transform:uppercase;
+    padding:4px 10px; border-radius:999px;
+    color:#fff;
+  }
+  .ba-pair .ba-before .ba-label{ background:rgba(58,46,40,.72); }
+  .ba-pair .ba-after .ba-label{ background:var(--rose-deep); }
+  .ba-pair figcaption{
+    position:absolute; left:0; right:0; bottom:0;
+    padding:7px 10px 6px;
+    font-size:.68rem;
+    letter-spacing:.03em;
+    color:#fff;
+    background:linear-gradient(to top, rgba(20,14,10,.7), transparent);
+  }
+  @media (max-width:560px){ .ba-pair{ grid-template-columns:1fr; } }
+
+  .context{
+    margin:40px 0 8px;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:26px 28px;
+  }
+  .context h2{
+    font-size:1.25rem;
+    margin-bottom:12px;
+  }
+  .context p{
+    margin:0 0 12px;
+    font-size:.94rem;
+    color:var(--ink-soft);
+    max-width:70ch;
+  }
+  .context p:last-child{ margin-bottom:0; }
+  .context strong{ color:var(--ink); }
+
+  .invit-block{ margin-top:26px; padding-top:22px; border-top:1px dashed var(--line); }
+  .invit-intro{
+    font-size:.9rem;
+    font-style:italic;
+    color:var(--ink-soft);
+    max-width:68ch;
+    margin:0 0 14px;
+  }
+
+  .gallery-note{
+    text-align:center;
+    font-size:.82rem;
+    color:var(--ink-soft);
+    margin:6px 0 0;
+  }
+
+  /* secondary photo mosaics (lieu additionnel / voitures) */
+  .mosaic{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:10px;
+    margin-top:16px;
+  }
+  .mosaic figure{
+    margin:0; position:relative; border-radius:10px; overflow:hidden;
+    box-shadow:var(--shadow);
+    background:var(--card);
+    aspect-ratio:4/3;
+  }
+  .mosaic img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .mosaic figcaption{
+    position:absolute; left:0; right:0; bottom:0;
+    padding:7px 10px 6px;
+    font-size:.66rem;
+    letter-spacing:.03em;
+    color:#fff;
+    background:linear-gradient(to top, rgba(20,14,10,.7), transparent);
+  }
+  @media (max-width:760px){ .mosaic{ grid-template-columns:repeat(2, 1fr); } }
+
+  .mosaic-small{
+    display:grid;
+    grid-template-columns:repeat(6, 1fr);
+    gap:8px;
+    margin-top:10px;
+  }
+  .mosaic-small figure{
+    margin:0; position:relative; border-radius:8px; overflow:hidden;
+    box-shadow:var(--shadow);
+    background:var(--card);
+    aspect-ratio:4/3;
+  }
+  .mosaic-small img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .mosaic-small figcaption{
+    position:absolute; left:0; right:0; bottom:0;
+    padding:4px 6px 4px;
+    font-size:.56rem;
+    letter-spacing:.02em;
+    color:#fff;
+    background:linear-gradient(to top, rgba(20,14,10,.7), transparent);
+  }
+  @media (max-width:760px){ .mosaic-small{ grid-template-columns:repeat(3, 1fr); } }
+
+  .cars{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+    margin-top:6px;
+  }
+  .car-card{
+    background:var(--paper-raised);
+    border:1px solid var(--line);
+    border-radius:14px;
+    overflow:hidden;
+    box-shadow:var(--shadow);
+  }
+  .car-card figure{ margin:0; aspect-ratio:16/10; background:var(--card); }
+  .car-card img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .car-card .car-body{ padding:16px 18px 18px; }
+  .car-card h3{
+    font-family:'Inter',sans-serif; font-weight:700; font-size:.78rem;
+    letter-spacing:.06em; text-transform:uppercase; color:var(--rose-deep);
+    margin-bottom:6px;
+  }
+  .car-card p{ margin:0; font-size:.9rem; color:var(--ink-soft); }
+  @media (max-width:640px){ .cars{ grid-template-columns:1fr; } }
+
+  /* ---------- SECTIONS ---------- */
+  main{ padding-top:8px; }
+  section{ padding:44px 0; border-bottom:1px solid var(--line); }
+  section:last-of-type{ border-bottom:none; }
+
+  .section-head{
+    display:flex;
+    align-items:baseline;
+    gap:14px;
+    margin-bottom:22px;
+  }
+  .section-head h2{ font-size:1.7rem; }
+  .section-head .num{
+    font-family:'Marcellus', serif;
+    color:var(--rose);
+    font-size:1rem;
+    letter-spacing:.05em;
+  }
+  .section-intro{
+    color:var(--ink-soft);
+    max-width:64ch;
+    margin:0 0 24px;
+    font-size:.98rem;
+  }
+
+  /* card grid for criteria */
+  .cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(240px,1fr));
+    gap:14px;
+  }
+  .card{
+    background:var(--paper-raised);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:20px 20px 18px;
+    box-shadow:var(--shadow);
+  }
+  .card h3{
+    font-family:'Inter',sans-serif;
+    font-weight:700;
+    font-size:.78rem;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    color:var(--rose-deep);
+    margin-bottom:10px;
+    display:flex; align-items:center; gap:8px;
+  }
+  .card ul{ margin:0; padding-left:1.1em; }
+  .card li{ margin:4px 0; font-size:.92rem; }
+  .card p{ margin:0; font-size:.92rem; }
+
+  /* palette swatches */
+  .palette{
+    display:flex; flex-wrap:wrap; gap:12px;
+    margin-top:6px;
+  }
+  .swatch{
+    display:flex; flex-direction:column; align-items:center; gap:6px;
+    width:88px;
+  }
+  .swatch .chip{
+    width:56px; height:56px; border-radius:50%;
+    border:1px solid rgba(0,0,0,.08);
+    box-shadow:var(--shadow);
+  }
+  .swatch span{ font-size:.72rem; color:var(--ink-soft); text-align:center; }
+
+  /* dress code table */
+  .dress-table{ width:100%; border-collapse:collapse; }
+  .dress-table th, .dress-table td{
+    text-align:left; padding:10px 14px;
+    border-bottom:1px solid var(--line);
+    font-size:.92rem;
+  }
+  .dress-table th{
+    font-family:'Inter',sans-serif; font-weight:700;
+    font-size:.72rem; letter-spacing:.06em; text-transform:uppercase;
+    color:var(--ink-soft);
+  }
+  .dot{ display:inline-block; width:10px; height:10px; border-radius:50%; margin-right:8px; vertical-align:-1px;}
+
+  /* priority tags */
+  .tag{
+    display:inline-block;
+    font-size:.68rem;
+    font-weight:700;
+    letter-spacing:.05em;
+    text-transform:uppercase;
+    padding:3px 9px;
+    border-radius:999px;
+    margin-bottom:10px;
+  }
+  .tag-essential{ background:var(--rose-tint); color:var(--rose-deep); }
+  .tag-important{ background:var(--gold-tint); color:#8a6a2e; }
+  .tag-option{ background:var(--blue-tint); color:#4f6b70; }
+  :root[data-theme="dark"] .tag-important, @media (prefers-color-scheme:dark){ :root:not([data-theme="light"]) .tag-important{ color:#d3b378; } }
+  :root[data-theme="dark"] .tag-option{ color:#a9c4c8; }
+  @media (prefers-color-scheme:dark){ :root:not([data-theme="light"]) .tag-option{ color:#a9c4c8; } }
+
+  /* flow diagram */
+  .flow{
+    display:flex; flex-wrap:wrap; align-items:center; gap:8px;
+    font-family:'Marcellus', serif;
+    font-size:.95rem;
+    color:var(--ink);
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:18px 20px;
+  }
+  .flow .step{ padding:5px 12px; }
+  .flow .arrow{ color:var(--rose); font-family:'Inter',sans-serif; }
+
+  /* checklist for logistics */
+  .checklist{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(200px,1fr));
+    gap:10px 24px;
+  }
+  .checklist li{ list-style:none; margin:0; padding-left:1.5em; position:relative; font-size:.92rem; }
+  .checklist li::before{
+    content:"";
+    position:absolute; left:0; top:.45em;
+    width:9px; height:9px;
+    border-radius:2px;
+    background:var(--rose);
+    transform:rotate(45deg);
+  }
+  .checklist{ padding:0; margin:0; }
+
+  /* questions list */
+  .qgrid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(260px,1fr));
+    gap:18px;
+  }
+  .qblock h3{
+    font-family:'Inter',sans-serif; font-weight:700; font-size:.78rem;
+    letter-spacing:.06em; text-transform:uppercase; color:var(--gold);
+    margin-bottom:8px; border-bottom:1px dashed var(--line); padding-bottom:6px;
+  }
+  .qblock ol{ margin:0; padding-left:1.2em; }
+  .qblock li{ margin:5px 0; font-size:.9rem; }
+
+  /* not-included callout */
+  .callout{
+    display:flex; gap:14px;
+    background:var(--blue-tint);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:18px 20px;
+  }
+  .callout .mark{
+    font-family:'Cormorant Garamond', serif;
+    font-size:1.6rem;
+    color:var(--blue);
+    line-height:1;
+  }
+  .callout p{ margin:0; font-size:.92rem; }
+  .callout strong{ color:var(--ink); }
+
+  /* fil conducteur */
+  .thread{
+    display:flex; flex-wrap:wrap; justify-content:center; align-items:center;
+    gap:6px 4px;
+    text-align:center;
+    font-family:'Marcellus', serif;
+    font-size:.92rem;
+  }
+  .thread .node{
+    padding:8px 14px;
+    border-radius:999px;
+    background:var(--rose-tint);
+    color:var(--rose-deep);
+  }
+  .thread .arrow{ color:var(--gold); font-family:'Inter',sans-serif; font-size:.9rem; }
+
+  /* footer / contact */
+  footer{
+    padding:48px 24px 64px;
+    text-align:center;
+  }
+  .contact-card{
+    max-width:520px; margin:0 auto;
+    background:var(--paper-raised);
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:32px 28px;
+    box-shadow:var(--shadow);
+  }
+  .contact-card h2{ font-size:1.5rem; margin-bottom:8px; }
+  .contact-card p{ color:var(--ink-soft); font-size:.92rem; margin:0 0 18px; }
+  .contact-row{
+    display:flex; justify-content:center; gap:26px; flex-wrap:wrap;
+    font-family:'Marcellus', serif; font-size:.98rem;
+  }
+  .contact-row .who{ display:block; font-family:'Inter',sans-serif; font-size:.68rem; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:3px; }
+  .foot-note{ margin-top:28px; font-size:.78rem; color:var(--ink-soft); }
+
+  @media print{
+    body{ background:#fff; }
+    section{ break-inside:avoid; }
+  }
+
+  /* ---------- LIGHTBOX ---------- */
+  img.zoomable{
+    cursor:zoom-in;
+    transition:filter .15s ease;
+  }
+  img.zoomable:hover{ filter:brightness(1.04); }
+  img.zoomable:focus-visible{ outline:2px solid var(--rose-deep); outline-offset:2px; }
+
+  .lightbox{
+    position:fixed; inset:0;
+    z-index:1000;
+    display:none;
+    align-items:center; justify-content:center;
+    padding:48px 24px;
+    background:rgba(20,14,10,.86);
+    backdrop-filter:blur(2px);
+  }
+  .lightbox.is-open{ display:flex; }
+  .lightbox img{
+    max-width:100%; max-height:calc(100vh - 140px);
+    border-radius:8px;
+    box-shadow:0 20px 60px rgba(0,0,0,.5);
+    object-fit:contain;
+  }
+  .lightbox figcaption{
+    position:absolute; left:0; right:0; bottom:24px;
+    text-align:center;
+    color:#fff;
+    font-family:'Marcellus', serif;
+    font-size:.95rem;
+    padding:0 24px;
+  }
+  .lightbox-close{
+    position:absolute; top:20px; right:24px;
+    width:42px; height:42px;
+    border-radius:50%;
+    border:1px solid rgba(255,255,255,.35);
+    background:rgba(255,255,255,.08);
+    color:#fff;
+    font-size:1.3rem;
+    line-height:1;
+    cursor:pointer;
+  }
+  .lightbox-close:hover{ background:rgba(255,255,255,.18); }
+  @media (prefers-reduced-motion:no-preference){
+    img.zoomable{ transition:filter .15s ease, transform .15s ease; }
+  }
+
+  /* ---------- RESPONSIVE / MOBILE ---------- */
+  .table-scroll{ overflow-x:auto; -webkit-overflow-scrolling:touch; }
+
+  @media (max-width:640px){
+    .wrap{ padding:0 16px 64px; }
+
+    header.hero{ padding:40px 16px 36px; }
+    .seal{ width:min(94%, 320px); padding:16px 18px; }
+    .kicker{ font-size:.72rem; letter-spacing:.22em; }
+    h1.title{ font-size:clamp(1.7rem, 8vw, 2.4rem); }
+    .subtitle{ font-size:.96rem; }
+    .date-line{ font-size:.88rem; padding:8px 14px; text-align:center; }
+    .email-line{ font-size:.84rem; }
+
+    .context{ padding:20px 18px; margin-top:28px; }
+    .context h2{ font-size:1.1rem; }
+    .context p{ font-size:.9rem; }
+
+    section{ padding:32px 0; }
+    .section-head{ gap:10px; margin-bottom:16px; }
+    .section-head h2{ font-size:1.4rem; }
+    .section-intro{ font-size:.92rem; }
+
+    .cards{ grid-template-columns:1fr !important; }
+    .card{ padding:16px 16px 15px; }
+
+    /* logo JMPP card: stack image above text instead of side-by-side */
+    #dresscode .card[style*="display:flex"]{
+      flex-direction:column;
+      align-items:center !important;
+      text-align:center;
+    }
+    #dresscode .card[style*="display:flex"] img{
+      width:100px !important; height:100px !important;
+    }
+
+    .dress-table th, .dress-table td{ padding:8px 8px; font-size:.84rem; }
+
+    .qgrid{ grid-template-columns:1fr; }
+    .checklist{ grid-template-columns:1fr; }
+
+    .flow{ padding:14px 16px; justify-content:flex-start; font-size:.88rem; }
+    .flow .step{ padding:4px 6px; }
+
+    .cars{ gap:14px; }
+
+    .thread{ gap:5px 3px; font-size:.82rem; }
+    .thread .node{ padding:6px 10px; }
+
+    footer{ padding:36px 16px 48px; }
+    .contact-card{ padding:24px 18px; }
+    .contact-card h2{ font-size:1.25rem; }
+    .contact-row{ gap:16px 22px; font-size:.9rem; }
+
+    .lightbox{ padding:20px 12px; }
+    .lightbox-close{ top:10px; right:10px; width:38px; height:38px; }
+    .lightbox figcaption{ bottom:12px; font-size:.85rem; }
+  }
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="seal">
+    <img class="zoomable logo-light" src="images/img-01-c5acec1373.png" alt="Logo JMPP × Manoir des Lys — couronne, sceau du couple et de leurs deux chihuahuas au centre, roues de calèche" data-caption="Logo JMPP × Manoir des Lys">
+    <img class="zoomable logo-dark" src="images/img-02-1469c43e63.png" alt="Logo JMPP × Manoir des Lys — couronne, sceau du couple et de leurs deux chihuahuas au centre, roues de calèche" data-caption="Logo JMPP × Manoir des Lys">
+  </div>
+  <div class="kicker">Recherche de prestataire</div>
+  <h1 class="title">Fleuriste &amp; décoratrice<br><em>pour notre mariage</em></h1>
+  <p class="subtitle">Mariage de Jeremy &amp; Marine — cérémonie laïque et réception au Manoir des Lys, à Auchel. Voici l'ensemble de nos critères pour vous présenter notre projet et évaluer votre disponibilité.</p>
+  <div class="date-line">Dimanche 22 août 2027 <span class="sep">·</span> 16h30 → 4h00 <span class="sep">·</span> Manoir des Lys, Auchel</div>
+  <p class="email-line">Merci de nous transmettre votre devis à <strong>j.thery2311@outlook.fr</strong></p>
+</header>
+
+<main class="wrap">
+
+  <div class="context">
+    <h2>Le contexte de notre mariage</h2>
+    <p>Nous sommes <strong>Jeremy &amp; Marine</strong>, tous les deux âgés de 30 ans, en couple et en ménage depuis <strong>10 ans</strong>. Nos deux chihuahuas nous accompagnent depuis leur naissance et font pleinement partie de la famille — c'est pourquoi ils tiennent une vraie place dans ce mariage, jusque dans notre logo. Nous nous marions le <strong>dimanche 22 août 2027</strong> au <strong>Manoir des Lys</strong>, à Auchel — un manoir en briques rouges du début du XX<sup>e</sup> siècle, avec un grand jardin arboré où se déroulera la cérémonie laïque. Le mariage civil aura lieu avant, le 14 août 2027 à la mairie de Liévin ; le 22 août est donc dédié à la cérémonie laïque et à la réception principale.</p>
+    <p>La journée s'articule autour de deux groupes d'invités : une cinquantaine de <strong>proches présents toute la journée</strong> (cérémonie, vin d'honneur, repas, soirée) et une cinquantaine d'<strong>invités supplémentaires présents uniquement pour le vin d'honneur</strong>, de 17h à 19h, avant de nous laisser poursuivre la soirée en plus petit comité. Ce flux — et notamment le passage de la porte du jardin vers la salle de bal puis la salle principale — est un point que nous voulons particulièrement soigné dans la décoration.</p>
+    <p>Nous imaginons une ambiance <strong>romantique et florale dans un manoir, avec une inspiration de réception royale, des tons pastel et des touches dorées</strong> — élégante, chaleureuse et personnalisée, à l'opposé d'un style champêtre ou guinguette. Après 10 ans de vie commune, ce que nous recherchons avant tout, c'est de <strong>l'émotion</strong> — en particulier pendant la cérémonie laïque — avec une petite touche d'humour ici ou là, sans que cela prenne le dessus sur la solennité du moment. Cette identité se retrouve jusque dans notre logo, un sceau représentant Jeremy, Marine, nos deux chihuahuas, des roses et le monogramme <strong>JMPP</strong>, que nous aimerions voir décliné avec parcimonie à travers la décoration.</p>
+    <p>Ce document rassemble l'ensemble de nos critères — univers, espaces à décorer, contraintes du lieu, floral personnel et attentes sur le devis — pour vous permettre de comprendre notre projet et d'évaluer votre disponibilité pour le 22 août 2027.</p>
+  </div>
+
+  <figure class="hero-shot">
+    <img class="zoomable" src="images/img-03-c94dc9391c.jpg" alt="Vue aérienne du Manoir des Lys, avec la façade, l'allée, la terrasse et le jardin" data-caption="Vue aérienne du domaine">
+    <figcaption>Le Manoir des Lys, Auchel — vue d'ensemble du domaine</figcaption>
+  </figure>
+  <p class="gallery-note">Le lieu tel qu'il est aujourd'hui, et l'ambiance pastel / dorée que nous visons pour la décoration.</p>
+
+  <div class="before-after">
+    <h3>Avant / Après — Cérémonie laïque</h3>
+    <div class="ba-pair">
+      <figure class="ba-before"><span class="ba-label">Avant</span><img class="zoomable" src="images/img-04-a2d766e718.webp" alt="Jardin et espace de cérémonie laïque du Manoir, état actuel" data-caption="Cérémonie laïque — état actuel du jardin"><figcaption>État actuel du jardin</figcaption></figure>
+      <figure class="ba-after"><span class="ba-label">Après</span><img class="zoomable" src="images/img-05-4f5b4d6769.jpg" alt="Référence d'ambiance pour la cérémonie laïque : arche florale pastel, chaises habillées, chemin de pétales, bougies" data-caption="Cérémonie laïque — référence d'ambiance recherchée"><figcaption>Ambiance recherchée</figcaption></figure>
+    </div>
+  </div>
+
+  <div class="before-after">
+    <h3>Avant / Après — Salle de repas</h3>
+    <div class="ba-pair">
+      <figure class="ba-before"><span class="ba-label">Avant</span><img class="zoomable" src="images/img-06-eef5af11a0.jpg" alt="Salle de réception du Manoir, telle quelle" data-caption="Salle de repas — état actuel"><figcaption>État actuel de la salle</figcaption></figure>
+      <figure class="ba-after"><span class="ba-label">Après</span><img class="zoomable" src="images/img-07-0de6839366.jpg" alt="Référence d'ambiance recherchée : tons pastel, dorés, candélabres fleuris" data-caption="Salle de repas — référence d'ambiance recherchée"><figcaption>Ambiance recherchée</figcaption></figure>
+    </div>
+  </div>
+
+  <div class="mosaic" style="margin-top:26px;">
+    <figure><img class="zoomable" src="images/img-08-41ccf2ee87.jpg" alt="Référence pour le coin lounge : fauteuils velours rose et mauve, coussins, bougies, calèche en arrière-plan" data-caption="Référence — coin lounge (velours rose)"><figcaption>Référence — coin lounge (velours rose)</figcaption></figure>
+    <figure><img class="zoomable" src="images/img-09-26bc2306b6.jpg" alt="Référence pour le coin lounge avec mobilier blanc capitonné, coussins lavande et rose poudré, calèche en arrière-plan" data-caption="Référence — coin lounge (mobilier blanc)"><figcaption>Référence — coin lounge (mobilier blanc)</figcaption></figure>
+    <figure><img class="zoomable" src="images/img-10-23a3b7c58b.jpg" alt="Référence pour le menu : cadre doré, candélabre, roses pastel sur velours rose poudré" data-caption="Référence — présentation du menu"><figcaption>Référence — présentation du menu</figcaption></figure>
+    <figure><img class="zoomable" src="images/img-11-696d9bd9d3.jpg" alt="Référence pour le plan de table : cadres dorés fleuris sous une pergola" data-caption="Référence — plan de table (1)"><figcaption>Référence — plan de table (1)</figcaption></figure>
+    <figure><img class="zoomable" src="images/img-12-b6c73d8efb.jpg" alt="Référence pour le plan de table : cadres dorés fleuris à l'entrée de la salle de réception" data-caption="Référence — plan de table (2)"><figcaption>Référence — plan de table (2)</figcaption></figure>
+    <figure><img class="zoomable" src="images/img-13-165c5e2c3e.jpg" alt="Référence pour le panneau de bienvenue : logo JMPP × Manoir des Lys gravé en doré, décoration florale pastel, bougies" data-caption="Référence — panneau de bienvenue (1)"><figcaption>Référence — panneau de bienvenue (1)</figcaption></figure>
+    <figure><img class="zoomable" src="images/img-14-a84be0baaf.jpg" alt="Autre référence pour le panneau de bienvenue : miroir doré fleuri avec médaillons du sceau JMPP" data-caption="Référence — panneau de bienvenue (2)"><figcaption>Référence — panneau de bienvenue (2)</figcaption></figure>
+    <figure><img class="zoomable" src="images/img-15-aeb607a035.jpg" alt="Autre référence pour le panneau de bienvenue : cadre doré carré sur chevalet en bois" data-caption="Référence — panneau de bienvenue (3)"><figcaption>Référence — panneau de bienvenue (3)</figcaption></figure>
+    <figure><img class="zoomable" src="images/img-16-170d618409.jpg" alt="Autre référence pour le panneau de bienvenue : cadre doré ouvragé avec bannière Jeremy et Marine" data-caption="Référence — panneau de bienvenue (4)"><figcaption>Référence — panneau de bienvenue (4)</figcaption></figure>
+    <figure><img class="zoomable" src="images/img-17-a552ac67ce.jpg" alt="Référence pour les éventails personnalisés Manoir des Lys, présentés avec leur panneau explicatif" data-caption="Référence — éventails pour les invités"><figcaption>Référence — éventails pour les invités</figcaption></figure>
+    <figure><img class="zoomable" src="images/img-18-81d9eddbfb.jpg" alt="Référence pour les éventails personnalisés, présentation sur mobilier blanc" data-caption="Référence — éventails (mobilier blanc)"><figcaption>Référence — éventails (mobilier blanc)</figcaption></figure>
+    <figure><img class="zoomable" src="images/img-19-a0e6f64c36.jpg" alt="Planche récapitulative des panneaux de bienvenue avec éventails associés" data-caption="Récapitulatif — panneaux &amp; éventails"><figcaption>Récapitulatif — panneaux &amp; éventails</figcaption></figure>
+  </div>
+  <p class="gallery-note">Nos références d'ambiance pour le coin lounge, le menu, le plan de table, le panneau de bienvenue et les éventails.</p>
+
+  <div class="mosaic-small">
+    <figure><img class="zoomable" src="images/img-20-f15928d55f.webp" alt="Vue depuis la terrasse vers le lieu de la cérémonie laïque" data-caption="Depuis la terrasse"><figcaption>Depuis la terrasse</figcaption></figure>
+    <figure><img class="zoomable" src="images/img-21-4e2a7ac8fa.webp" alt="Calèche prévue pour les photos" data-caption="Calèche pour les photos"><figcaption>Calèche pour les photos</figcaption></figure>
+    <figure><img class="zoomable" src="images/img-22-3dbad681ab.webp" alt="Lâcher de lanternes en fin de soirée" data-caption="Lâcher de lanternes"><figcaption>Lâcher de lanternes</figcaption></figure>
+  </div>
+  <p class="gallery-note">Autres vues complémentaires du lieu.</p>
+
+  <!-- ===== UNIVERS ===== -->
+  <section id="univers">
+    <div class="section-head"><span class="num">01</span><h2>L'univers recherché</h2></div>
+    <p class="section-intro">Un mariage romantique et floral dans un manoir, avec une inspiration de réception royale, des tons pastel et des touches dorées. <strong>À éviter :</strong> une ambiance rustique, champêtre ou « guinguette ».</p>
+
+    <div class="cards">
+      <div class="card">
+        <h3>Ambiance</h3>
+        <ul>
+          <li>Royale &amp; élégante</li>
+          <li>Romantique &amp; florale</li>
+          <li>Raffinée et chaleureuse</li>
+          <li>Personnalisée (logo JMPP)</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Palette décoration</h3>
+        <div class="palette">
+          <div class="swatch"><div class="chip" style="background:#f2d9df"></div><span>Rose poudré</span></div>
+          <div class="swatch"><div class="chip" style="background:#ffffff;border-color:#ddd;"></div><span>Blanc</span></div>
+          <div class="swatch"><div class="chip" style="background:#f4ecd8"></div><span>Ivoire</span></div>
+          <div class="swatch"><div class="chip" style="background:#e6d2b5"></div><span>Beige</span></div>
+          <div class="swatch"><div class="chip" style="background:#f0dfc0"></div><span>Champagne</span></div>
+          <div class="swatch"><div class="chip" style="background:#dcebee"></div><span>Bleu très clair</span></div>
+          <div class="swatch"><div class="chip" style="background:linear-gradient(135deg,#c9a24a,#e9d18f)"></div><span>Doré (touche)</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="invit-block">
+      <p class="invit-intro">Pour donner une idée du niveau de soin que nous souhaitons apporter à chaque détail, voici nos faire-part — déjà réalisés et transmis à nos invités principaux : papier vélin, ruban satin rose poudré, roses artificielles piquées (chacune parfumée à l'huile essentielle), cachet de cire au monogramme JMPP.</p>
+      <div class="mosaic">
+        <figure><img class="zoomable" src="images/img-23-30c1ded5d5.jpg" alt="Faire-part de la cérémonie laïque, fermé par un ruban rose et un cachet de cire dorée JMPP" data-caption="Faire-part cérémonie — ruban &amp; cachet de cire JMPP"><figcaption>Ruban &amp; cachet de cire JMPP</figcaption></figure>
+        <figure><img class="zoomable" src="images/img-24-f222115f7c.jpg" alt="Carte du faire-part avec illustration du couple devant une arche fleurie" data-caption="Faire-part cérémonie — carte illustrée"><figcaption>Carte illustrée du faire-part</figcaption></figure>
+        <figure><img class="zoomable" src="images/img-25-0b6bd30fd1.jpg" alt="Carte holographique nacrée reprenant le sceau JMPP" data-caption="Carte holographique — sceau JMPP"><figcaption>Effet holographique — sceau JMPP</figcaption></figure>
+        <figure><img class="zoomable" src="images/img-26-d28bc51fc4.jpg" alt="Faire-part du mariage civil, avec ruban rose et sceau JMPP" data-caption="Faire-part du mariage civil"><figcaption>Faire-part du mariage civil</figcaption></figure>
+        <figure><img class="zoomable" src="images/img-27-9f0300dea2.jpg" alt="Cartes d'invitation au vin d'honneur, chacune personnalisée avec une fleur et un cachet de cire de couleur différente" data-caption="Cartes du vin d'honneur — personnalisées par fleur et couleur de cire"><figcaption>Cartes du vin d'honneur — personnalisées</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== DRESS CODE & LOGO ===== -->
+  <section id="dresscode">
+    <div class="section-head"><span class="num">02</span><h2>Dress code &amp; logo</h2></div>
+    <div class="cards" style="grid-template-columns: 1.3fr 1fr;">
+      <div class="card">
+        <h3>Dress code</h3>
+        <div class="table-scroll">
+        <table class="dress-table">
+          <tr><th>Qui</th><th>Couleurs</th></tr>
+          <tr><td>Invités</td><td>Beige et/ou doré</td></tr>
+          <tr><td>Témoins femmes</td><td><span class="dot" style="background:#e3a9bb"></span>Rose pâle + touche dorée</td></tr>
+          <tr><td>Témoins hommes</td><td><span class="dot" style="background:#9fc0c5"></span>Bleu clair + touche beige</td></tr>
+          <tr><td>Mariée</td><td>Robe de mariée</td></tr>
+          <tr><td>Marié</td><td>Costume — couleur à définir (boutonnière à penser spécifiquement pour lui)</td></tr>
+        </table>
+        </div>
+      </div>
+      <div class="card" style="display:flex; gap:16px; align-items:flex-start;">
+        <img class="zoomable" src="images/img-28-27e8bd7a19.jpg" alt="Sceau JMPP — Jeremy, Marine, leurs deux chihuahuas, roses et monogramme" data-caption="Sceau JMPP" style="width:140px; height:140px; border-radius:50%; object-fit:cover; border:1px solid var(--line); box-shadow:var(--shadow); flex:none;">
+        <div>
+          <h3>Notre logo JMPP</h3>
+          <p>Sceau circulaire avec Jeremy, Marine, nos deux chihuahuas, des roses, feuillages, le monogramme <strong>JMPP</strong> et la date 22/08/2027. À utiliser avec parcimonie mais de façon visible : panneau d'accueil, plan de table, urne, arche, projection lumineuse…</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FLUX INVITES ===== -->
+  <section id="flux">
+    <div class="section-head"><span class="num">03</span><h2>Déroulé &amp; flux des invités</h2></div>
+    <p class="section-intro">Point clé du projet : le cheminement des invités doit être accompagné par la décoration, notamment lors du passage du vin d'honneur vers la réception.</p>
+
+    <div class="cards" style="margin-bottom:18px;">
+      <div class="card">
+        <h3>Deux groupes d'invités</h3>
+        <ul>
+          <li><strong>~50 invités principaux</strong> : cérémonie, vin d'honneur, repas, soirée, gâteau, animations</li>
+          <li><strong>~50 invités supplémentaires</strong> : vin d'honneur (17h–19h) uniquement</li>
+          <li>Capacité vin d'honneur : <strong>~100 personnes</strong> · Capacité repas/soirée : <strong>~50 personnes</strong></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Horaires clés</h3>
+        <ul>
+          <li>16h30 — Cérémonie laïque</li>
+          <li>17h00–19h00 — Vin d'honneur (~100 pers.)</li>
+          <li>19h00 — Passage vers la réception (~50 pers.)</li>
+          <li>19h00–4h00 — Repas, soirée, gâteau, animations</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="flow">
+      <span class="step">Vin d'honneur</span><span class="arrow">→</span>
+      <span class="step">Porte du jardin</span><span class="arrow">→</span>
+      <span class="step">Salle de bal</span><span class="arrow">→</span>
+      <span class="step">Salle principale / repas</span>
+    </div>
+  </section>
+
+  <!-- ===== ESPACES A DECORER ===== -->
+  <section id="espaces">
+    <div class="section-head"><span class="num">04</span><h2>Espaces à décorer</h2></div>
+    <p class="section-intro">L'ensemble du parcours doit raconter une seule et même histoire, de l'extérieur jusqu'à la salle principale.</p>
+
+    <div class="cards">
+      <div class="card">
+        <h3>Extérieur</h3>
+        <ul>
+          <li>Portail du Manoir (mise en valeur, éclairage chaud)</li>
+          <li>Entrée / immersion vers la cérémonie</li>
+          <li>Guirlandes lumineuses sur la façade</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Cérémonie laïque</h3>
+        <ul>
+          <li>Arche florale importante (bois existant à évaluer, ou arche alternative)</li>
+          <li>Chemin blanc jusqu'à l'arche — sur graviers, avis technique demandé</li>
+          <li>Chaises, bancs, espace des mariés, balcon/terrasse visible</li>
+          <li>Calèche présente sur le lieu de cérémonie — à décorer (fleurs, rubans, éléments dorés)</li>
+        </ul>
+        <p style="margin-top:12px; font-size:.85rem; color:var(--ink-soft);"><strong style="color:var(--ink);">Souhait :</strong> petits accessoires utiles pour les invités, par exemple des éventails (en cas de forte chaleur), disposés sur les chaises ou à l'entrée de la cérémonie — idéalement coordonnés à l'univers du mariage.</p>
+      </div>
+      <div class="card">
+        <h3>Circulation</h3>
+        <ul>
+          <li>Porte du jardin comme point d'entrée vers la réception</li>
+          <li>Plan de table : emplacement stratégique, sans attroupement</li>
+          <li>Signalétique &amp; continuité salle de bal → salle principale</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Salle de réception</h3>
+        <ul>
+          <li>5 à 6 tables rondes (~50 invités) + table gâteau</li>
+          <li>Fleurs de table, nappes longues, assises habillées</li>
+          <li>Table des mariés : point focal, nettement différenciée</li>
+          <li>Un petit cadeau pour chaque invité principal, à disposer sur la table</li>
+        </ul>
+        <p style="margin-top:12px; font-size:.85rem; color:var(--ink-soft);"><strong style="color:var(--ink);">Contraintes du lieu :</strong> décoration du plafond interdite dans la salle de repas, et usage de vraies bougies interdit (prévoir des bougies LED en remplacement).</p>
+      </div>
+      <div class="card">
+        <h3>Salle des enfants</h3>
+        <ul>
+          <li>Une table pour les enfants, installée dans une salle à part</li>
+          <li>Décoration légère et ludique, cohérente avec l'univers du mariage</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FLORAL PERSONNEL ===== -->
+  <section id="floral-personnel">
+    <div class="section-head"><span class="num">05</span><h2>Floral personnel</h2></div>
+    <div class="cards">
+      <div class="card">
+        <h3>Bouquet de Marine</h3>
+        <p>Porté « comme un sac à main », fleurs plongeantes vers le bas. Élégant, romantique, pastel, cohérent avec les roses du logo.</p>
+      </div>
+      <div class="card">
+        <h3>Boutonnière de Jeremy</h3>
+        <p>Création spécifique (et non une variante des témoins) — costume encore non défini, boutonnière coordonnée au bouquet de Marine.</p>
+      </div>
+      <div class="card">
+        <h3>Témoins</h3>
+        <p><strong>4 témoins hommes :</strong> boutonnières bleu clair / beige, touches pastel.<br><strong>Témoins femmes :</strong> mini bouquet, bracelet floral ou fleur individuelle, rose pâle + touche dorée.</p>
+      </div>
+      <div class="card">
+        <h3>Filles d'honneur &amp; nos deux chihuahuas</h3>
+        <p>Filles d'honneur : petits bouquets ou bracelets floraux (nombre à confirmer).</p>
+        <p style="margin-top:8px;">Nos deux chihuahuas seront présents toute la journée et porteront les alliances pendant la cérémonie — accessoire floral sécurisé, adapté à leur petite taille. Un parc/enclos leur sera réservé sur place pour qu'ils puissent se reposer entre les temps forts : merci d'en tenir compte dans l'implantation générale de la décoration.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== OPTIONS ===== -->
+  <section id="options">
+    <div class="section-head"><span class="num">06</span><h2>Options à chiffrer séparément</h2></div>
+
+    <div class="cars">
+      <div class="car-card">
+        <figure><img class="zoomable" src="images/img-29-b4ad451537.png" alt="Excalibur Phaeton envisagée pour Marine" data-caption="Voiture de Marine — Excalibur Phaeton"></figure>
+        <div class="car-body">
+          <h3>Voiture de Marine</h3>
+          <p><strong>Excalibur Phaeton.</strong> Décoration envisagée : fleurs, bouquet sur le capot, rubans — un rendu élégant et discret.</p>
+        </div>
+      </div>
+      <div class="car-card">
+        <figure><img class="zoomable" src="images/img-30-8cbc7ff1eb.png" alt="Porsche 356 Speedster envisagée pour Jeremy" data-caption="Voiture de Jeremy — Porsche 356 Speedster"></figure>
+        <div class="car-body">
+          <h3>Voiture de Jeremy</h3>
+          <p><strong>Porsche 356 Speedster ou PGO similaire.</strong> Décoration à coordonner avec celle de la voiture de Marine.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="cards" style="margin-top:16px;">
+      <div class="card">
+        <span class="tag tag-option">Option</span>
+        <h3 style="margin-top:2px;">Urne (lune de miel)</h3>
+        <p>Non indispensable — style cohérent avec le thème, logo intégré si proposée.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CE QUI EST DEJA PREVU ===== -->
+  <section id="deja-prevu">
+    <div class="section-head"><span class="num">07</span><h2>Déjà réservé auprès du Manoir</h2></div>
+    <div class="callout">
+      <span class="mark">✳</span>
+      <p><strong>Ne pas inclure dans le devis :</strong> location du lieu, mobilier/chaises/bancs de cérémonie, officier de cérémonie, photomaton, livre d'or audio, structure gonflable, lâcher de lanternes, DJ, sonorisation, animateur, magicien, candy bar. Une arche en bois est disponible — à évaluer si elle peut être décorée pour correspondre à notre univers, sinon une arche alternative sera chiffrée à part.</p>
+    </div>
+    <div class="callout" style="margin-top:14px; background:var(--gold-tint);">
+      <span class="mark">✳</span>
+      <p><strong>Un organisateur dédié côté Manoir des Lys</strong> assure la synchronisation entre tous les prestataires et l'organisation générale de la journée. Il sera notre point de contact central le jour J pour que tout se déroule au mieux — n'hésitez donc pas à le solliciter directement pour toute question logistique ou de coordination qui se poserait avant l'événement (accès, horaires, contraintes du lieu, articulation avec les autres prestataires…).</p>
+    </div>
+    <div class="callout" style="margin-top:14px; background:var(--rose-tint);">
+      <span class="mark">✳</span>
+      <p><strong>Deux règles imposées par le Manoir, à respecter dans la conception :</strong> la décoration du plafond n'est pas autorisée dans la salle de repas, et l'usage de vraies bougies est interdit dans l'ensemble du lieu — merci de prévoir des bougies LED partout où une ambiance à la bougie est souhaitée.</p>
+    </div>
+    <div class="callout" style="margin-top:14px; background:var(--blue-tint);">
+      <span class="mark">✳</span>
+      <p><strong>Une grande partie du mobilier est déjà comprise avec le lieu</strong> (tables, chaises, bancs…). Nous souhaitons cependant apporter quelques améliorations ponctuelles à ce mobilier existant plutôt que de tout remplacer — par exemple, les chaises ont actuellement une assise noire, ce qui ne correspond pas à notre univers pastel/doré et que nous aimerions donc habiller ou remplacer. Merci de nous indiquer les possibilités et leur coût.</p>
+    </div>
+  </section>
+
+  <!-- ===== LOGISTIQUE ===== -->
+  <section id="logistique">
+    <div class="section-head"><span class="num">08</span><h2>Contraintes logistiques</h2></div>
+    <ul class="checklist">
+      <li>Installation terminée avant 16h30 (début cérémonie)</li>
+      <li>Désinstallation impérativement le soir même</li>
+      <li>Coordination avec les autres prestataires assurée par l'organisateur du Manoir</li>
+      <li>Précision souhaitée : équipe jusqu'à 4h00, ou départ anticipé organisé</li>
+    </ul>
+  </section>
+
+  <!-- ===== CE QU'ON ATTEND DU DEVIS ===== -->
+  <section id="devis">
+    <div class="section-head"><span class="num">09</span><h2>Ce que nous attendons du devis</h2></div>
+    <div class="cards">
+      <div class="card">
+        <span class="tag tag-essential">Priorité 1</span>
+        <h3 style="margin-top:2px;">Proposition idéale</h3>
+        <p>Nous n'avons pas d'idée précise des prix du marché et ne fixons donc pas de budget cible au départ : nous voulons découvrir la décoration complète que vous jugez idéale pour notre mariage, avec son coût réel. Un devis détaillé nous permettra ensuite de faire nos arbitrages si le total dépasse trop le budget que nous souhaitons y allouer.</p>
+      </div>
+      <div class="card">
+        <span class="tag tag-important">Priorité 2</span>
+        <h3 style="margin-top:2px;">Devis détaillé poste par poste</h3>
+        <p>Pas de ligne unique « Décoration mariage : XXXX € » — chaque élément identifié séparément, pour permettre nos arbitrages ensuite.</p>
+      </div>
+      <div class="card">
+        <span class="tag tag-option">Priorité 3</span>
+        <h3 style="margin-top:2px;">Hiérarchisation</h3>
+        <p>Pour chaque poste si possible : Essentiel / Important / Option-perfectionnement.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== QUESTIONS ===== -->
+  <section id="questions">
+    <div class="section-head"><span class="num">10</span><h2>Questions que nous poserons</h2></div>
+    <div class="qgrid">
+      <div class="qblock">
+        <h3>Disponibilité &amp; équipe</h3>
+        <ol>
+          <li>Disponible le 22 août 2027 ?</li>
+          <li>Seul(e) ou en équipe ? Fleuriste partenaire ?</li>
+          <li>Décoration + floral pris en charge ensemble ?</li>
+        </ol>
+      </div>
+      <div class="qblock">
+        <h3>Expérience</h3>
+        <ol>
+          <li>Déjà travaillé au Manoir des Lys ?</li>
+          <li>Réalisations en manoir / domaine similaire ?</li>
+          <li>Exemples d'ambiance royale / pastel / dorée ?</li>
+        </ol>
+      </div>
+      <div class="qblock">
+        <h3>Conception</h3>
+        <ol>
+          <li>Moodboard, projection 3D ?</li>
+          <li>Plusieurs versions d'arche possibles ?</li>
+          <li>Recommandation table des mariés &amp; intégration du logo ?</li>
+        </ol>
+      </div>
+      <div class="qblock">
+        <h3>Fleurs &amp; saison</h3>
+        <ol>
+          <li>Fleurs conseillées pour un mariage d'août ?</li>
+          <li>Alternatives selon disponibilité ?</li>
+          <li>Gestion des fortes chaleurs estivales ?</li>
+        </ol>
+      </div>
+      <div class="qblock">
+        <h3>Logistique</h3>
+        <ol>
+          <li>Heure d'arrivée, durée, nombre de personnes ?</li>
+          <li>Installation / désinstallation incluses ?</li>
+          <li>Transport inclus ? Frais de nuit ?</li>
+        </ol>
+      </div>
+      <div class="qblock">
+        <h3>Paiement</h3>
+        <ol>
+          <li>Acompte : montant et échéance ?</li>
+          <li>Échéancier du solde ?</li>
+          <li>Conditions d'annulation / modification ?</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== VISION FINALE ===== -->
+  <section id="vision" style="border-bottom:none;">
+    <div class="section-head"><span class="num">11</span><h2>Notre fil conducteur</h2></div>
+    <p class="section-intro">Nous souhaitons que nos invités aient la sensation d'entrer dans un univers créé spécialement pour nous. Nous restons ouverts à votre expertise et à toute proposition plus élégante ou plus adaptée au lieu.</p>
+    <div class="thread">
+      <span class="node">Jeremy &amp; Marine</span><span class="arrow">→</span>
+      <span class="node">JMPP</span><span class="arrow">→</span>
+      <span class="node">Nos 2 chihuahuas</span><span class="arrow">→</span>
+      <span class="node">Roses &amp; feuillages</span><span class="arrow">→</span>
+      <span class="node">Sceau / blason</span><span class="arrow">→</span>
+      <span class="node">Inspiration royale</span><span class="arrow">→</span>
+      <span class="node">Manoir</span><span class="arrow">→</span>
+      <span class="node">Tons pastel + doré</span>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="contact-card">
+    <h2>Parlons de votre disponibilité</h2>
+    <p>Mariage civil le 14 août 2027 (Mairie de Liévin) — cérémonie laïque et réception le 22 août 2027 au Manoir des Lys, Auchel.</p>
+    <div class="contact-row">
+      <div><span class="who">Mariés</span>Jeremy &amp; Marine</div>
+      <div><span class="who">Date</span>22 août 2027</div>
+      <div><span class="who">Lieu</span>Manoir des Lys, Auchel</div>
+    </div>
+    <p style="margin:22px 0 0; font-family:'Marcellus', serif; font-size:1.05rem; color:var(--ink);">Merci de nous transmettre votre devis à<br><strong>j.thery2311@outlook.fr</strong></p>
+  </div>
+  <p class="foot-note">Document préparé à partir de notre brief décoration &amp; fleuristerie complet, transmis en complément.</p>
+</footer>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Aperçu de la photo">
+  <button class="lightbox-close" id="lightboxClose" type="button" aria-label="Fermer l'aperçu">✕</button>
+  <img id="lightboxImg" src="" alt="">
+  <figcaption id="lightboxCaption"></figcaption>
+</div>
+
+<script>
+(function(){
+  var lb = document.getElementById('lightbox');
+  var lbImg = document.getElementById('lightboxImg');
+  var lbCaption = document.getElementById('lightboxCaption');
+  var lbClose = document.getElementById('lightboxClose');
+  var lastFocused = null;
+
+  function openLightbox(img){
+    lastFocused = document.activeElement;
+    lbImg.src = img.currentSrc || img.src;
+    lbImg.alt = img.alt || '';
+    lbCaption.textContent = img.getAttribute('data-caption') || img.alt || '';
+    lb.classList.add('is-open');
+    lbClose.focus();
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox(){
+    lb.classList.remove('is-open');
+    lbImg.src = '';
+    document.body.style.overflow = '';
+    if (lastFocused) lastFocused.focus();
+  }
+
+  document.querySelectorAll('img.zoomable').forEach(function(img){
+    img.setAttribute('tabindex', '0');
+    img.setAttribute('role', 'button');
+    img.addEventListener('click', function(){ openLightbox(img); });
+    img.addEventListener('keydown', function(e){
+      if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); openLightbox(img); }
+    });
+  });
+
+  lbClose.addEventListener('click', closeLightbox);
+  lb.addEventListener('click', function(e){ if (e.target === lb) closeLightbox(); });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && lb.classList.contains('is-open')) closeLightbox();
+  });
+})();
+</script>
+</body>
+</html>
