@@ -1,5 +1,5 @@
 -- Journal des visites de la fiche fleuriste & décoratrice.
--- À exécuter une seule fois dans Supabase (même projet que le site RSVP) :
+-- À exécuter une seule fois dans le projet Supabase de la fiche :
 -- SQL Editor → New query → coller → Run.
 --
 -- Chaque passage enregistre : date, adresse IP, navigateur, page d'origine, langue,
@@ -7,8 +7,8 @@
 -- L'adresse IP est relevée par Supabase à partir de la requête : la page ne peut pas la falsifier.
 -- Un même visiteur qui recharge la page dans les 30 minutes ne crée pas de nouvelle ligne.
 --
--- Les visiteurs peuvent seulement ajouter leur passage, jamais lire le journal.
--- Seuls les mariés (comptes de public.admins, voir le site RSVP) peuvent le consulter.
+-- Les visiteurs peuvent seulement ajouter leur passage (via log_fiche_visit), jamais lire
+-- le journal. Il se consulte depuis le tableau de bord Supabase (Table Editor → fiche_visites).
 
 create table if not exists public.fiche_visites (
   id          bigint generated always as identity primary key,
@@ -26,15 +26,6 @@ create index if not exists fiche_visites_visitor_idx on public.fiche_visites (vi
 
 alter table public.fiche_visites enable row level security;
 revoke all on public.fiche_visites from anon, authenticated;
-grant select, delete on public.fiche_visites to authenticated;
-
-drop policy if exists "Admins lisent les visites" on public.fiche_visites;
-create policy "Admins lisent les visites" on public.fiche_visites
-  for select to authenticated using (public.is_admin());
-
-drop policy if exists "Admins suppriment les visites" on public.fiche_visites;
-create policy "Admins suppriment les visites" on public.fiche_visites
-  for delete to authenticated using (public.is_admin());
 
 create or replace function public.log_fiche_visit(
   p_visitor_id text,

@@ -6,7 +6,7 @@ Publiée sur GitHub Pages : https://theryble.github.io/mariage-recherche-fleuris
 
 ## Journal des visites
 
-Chaque passage sur la fiche (date, adresse IP, navigateur, page d'origine) est enregistré dans la table `fiche_visites` du projet Supabase du site RSVP.
+Chaque passage sur la fiche (date, adresse IP, navigateur, page d'origine) est enregistré dans la table `fiche_visites` du projet Supabase dédié à la fiche (le même que pour les cercles de présence).
 
 Mise en place, une seule fois : Supabase → **SQL Editor** → **New query** → coller le contenu de `supabase/visites.sql` → **Run**.
 
