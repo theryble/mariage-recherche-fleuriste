@@ -1141,6 +1141,7 @@
     <p style="margin:22px 0 0; font-family:'Marcellus', serif; font-size:1.05rem; color:var(--ink);">Merci de nous transmettre votre devis à<br><strong>j.thery2311@outlook.fr</strong></p>
   </div>
   <p class="foot-note">Document préparé à partir de notre brief décoration &amp; fleuristerie complet, transmis en complément.</p>
+  <p class="foot-note" style="margin-top:8px;">Pour notre suivi, les visites de cette page sont enregistrées (date, adresse IP, navigateur) et seront effacées après le mariage.</p>
 </footer>
 
 <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Aperçu de la photo">
@@ -1204,8 +1205,6 @@
 (function(){
   var SUPABASE_URL = 'https://bvmkoijthojntwgkiqzr.supabase.co';
   var SUPABASE_KEY = 'sb_publishable_dd39HTJgxH99JcDIK1a4lQ_OgawMAMI';
-  if (!window.supabase) return;
-
   var FLOWERS = ['Pivoine','Rose','Lys','Hortensia','Pensée','Dahlia','Tulipe','Jasmin','Camélia','Iris',
                  'Glycine','Orchidée','Magnolia','Lavande','Gardénia','Freesia','Anémone','Renoncule','Lilas','Violette',
                  'Coquelicot','Bleuet','Mimosa','Muguet','Edelweiss','Gerbera','Azalée','Bégonia','Capucine','Cosmos'];
@@ -1221,6 +1220,19 @@
            name: FLOWERS[r(FLOWERS.length)], color: COLORS[r(COLORS.length)] };
     save('jmpp-presence-me', me);
   }
+
+  /* Journal des visites (table public.fiche_visites, voir supabase/visites.sql) :
+     l'adresse IP et le navigateur sont relevés par Supabase à partir de la requête. */
+  try {
+    var headers = { 'Content-Type': 'application/json', 'apikey': SUPABASE_KEY };
+    if (SUPABASE_KEY.indexOf('eyJ') === 0) headers['Authorization'] = 'Bearer ' + SUPABASE_KEY;
+    fetch(SUPABASE_URL + '/rest/v1/rpc/log_fiche_visit', { method: 'POST', headers: headers, keepalive: true,
+      body: JSON.stringify({ p_visitor_id: me.id, p_flower_name: me.name, p_referrer: document.referrer || null,
+                             p_language: navigator.language || null, p_screen: screen.width + 'x' + screen.height })
+    }).catch(function(){});
+  } catch(e){}
+
+  if (!window.supabase) return;
 
   /* Section en cours de lecture : le dernier titre passé au-dessus du milieu de l'écran. */
   var marks = [{ el: document.querySelector('header.hero'), label: 'En-tête' },
