@@ -68,6 +68,19 @@ $$;
 revoke all on function public.log_fiche_visit(text, text, text, text, text) from public;
 grant execute on function public.log_fiche_visit(text, text, text, text, text) to anon, authenticated;
 
+-- Les dates sont stockées en heure universelle (UTC), comme partout dans Supabase.
+-- Cette vue les affiche à l'heure de Paris (heure d'été / d'hiver gérée automatiquement) :
+-- Table Editor → fiche_visites_paris.
+create or replace view public.fiche_visites_paris
+with (security_invoker = true) as
+  select id,
+         (visited_at at time zone 'Europe/Paris')::timestamp(0) as heure_paris,
+         flower_name, ip, referrer, language, screen, user_agent, visitor_id
+  from public.fiche_visites
+  order by visited_at desc;
+
+revoke all on public.fiche_visites_paris from anon, authenticated;
+
 -- Consulter les visites (les plus récentes d'abord) :
 --   select visited_at at time zone 'Europe/Paris' as quand, flower_name, ip, referrer, user_agent
 --   from public.fiche_visites order by visited_at desc;

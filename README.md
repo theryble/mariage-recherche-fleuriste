@@ -10,4 +10,4 @@ Chaque passage sur la fiche (date, adresse IP, navigateur, page d'origine) est e
 
 Mise en place, une seule fois : Supabase → **SQL Editor** → **New query** → coller le contenu de `supabase/visites.sql` → **Run**.
 
-Consultation : **Table Editor** → `fiche_visites`, ou les requêtes en fin de `supabase/visites.sql`.
+Consultation : **Table Editor** → `fiche_visites_paris` (heure de Paris ; `fiche_visites` est en heure UTC), ou les requêtes en fin de `supabase/visites.sql`.
