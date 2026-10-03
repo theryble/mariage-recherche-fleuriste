@@ -675,6 +675,53 @@
     .lightbox-close{ top:10px; right:10px; width:38px; height:38px; }
     .lightbox figcaption{ bottom:12px; font-size:.85rem; }
   }
+
+  /* ---------- PRÉSENCE ---------- */
+  .presence{
+    position:fixed; right:16px; bottom:16px; z-index:900;
+    display:flex; flex-direction:column; align-items:flex-end; gap:8px;
+  }
+  .presence[hidden]{ display:none; }
+  .presence-stack{
+    display:flex; align-items:center;
+    padding:5px 7px 5px 13px;
+    border:1px solid var(--line); border-radius:999px;
+    background:var(--paper-raised);
+    box-shadow:var(--shadow);
+    cursor:pointer;
+  }
+  .presence-dot{
+    width:30px; height:30px; flex:none;
+    display:inline-flex; align-items:center; justify-content:center;
+    border-radius:50%;
+    border:2px solid var(--paper-raised);
+    color:#fff;
+    font:700 .78rem/1 'Inter', sans-serif;
+  }
+  .presence-stack .presence-dot{ margin-left:-6px; }
+  .presence-more{ background:var(--ink-soft); }
+  .presence-dot-sm{ width:28px; height:28px; }
+  .presence-dot-xs{ width:20px; height:20px; font-size:.6rem; border-width:1.5px; margin-left:-4px; }
+  .presence-list{
+    display:none;
+    min-width:220px; max-width:min(300px, calc(100vw - 32px));
+    padding:12px 14px;
+    border:1px solid var(--line); border-radius:12px;
+    background:var(--paper-raised);
+    box-shadow:var(--shadow);
+    font-size:.84rem;
+  }
+  .presence.is-open .presence-list{ display:block; }
+  .presence-title{
+    margin:0 0 8px;
+    font-size:.68rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--rose-deep);
+  }
+  .presence-row{ display:flex; align-items:center; gap:10px; margin:6px 0; line-height:1.3; }
+  .presence-row small{ color:var(--ink-soft); }
+  .presence-me{ margin:10px 0 0; padding-top:8px; border-top:1px dashed var(--line); font-size:.76rem; color:var(--ink-soft); }
+  .presence-here{ display:inline-flex; align-self:center; margin-left:auto; padding-left:4px; }
+  @media print{ .presence, .presence-here{ display:none !important; } }
 </style>
 </head>
 <body>
@@ -1100,6 +1147,11 @@
   <figcaption id="lightboxCaption"></figcaption>
 </div>
 
+<div class="presence" id="presence" hidden>
+  <div class="presence-list" id="presenceList" role="tooltip"></div>
+  <button class="presence-stack" id="presenceStack" type="button" aria-expanded="false"></button>
+</div>
+
 <script>
 (function(){
   var lb = document.getElementById('lightbox');
@@ -1139,6 +1191,125 @@
   document.addEventListener('keydown', function(e){
     if (e.key === 'Escape' && lb.classList.contains('is-open')) closeLightbox();
   });
+})();
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+/* Présence en temps réel (Supabase Realtime Presence, même projet que le site RSVP) :
+   chaque visiteur reçoit un nom de fleur et une couleur, et voit les autres personnes
+   présentes sur la page, ainsi que la section qu'elles sont en train de lire. */
+(function(){
+  var SUPABASE_URL = 'https://bvmkoijthojntwgkiqzr.supabase.co';
+  var SUPABASE_KEY = 'sb_publishable_dd39HTJgxH99JcDIK1a4lQ_OgawMAMI';
+  if (!window.supabase) return;
+
+  var FLOWERS = ['Pivoine','Rose','Lys','Hortensia','Pensée','Dahlia','Tulipe','Jasmin','Camélia','Iris',
+                 'Glycine','Orchidée','Magnolia','Lavande','Gardénia','Freesia','Anémone','Renoncule','Lilas','Violette'];
+  var COLORS  = ['#c98a9c','#a98249','#8fa9ae','#b07fb5','#d08c60','#6f9e7a','#c46a6a','#7d8fc4','#b59a3c','#5f9ea0'];
+
+  function load(k){ try { return JSON.parse(localStorage.getItem(k)); } catch(e){ return null; } }
+  function save(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){} }
+
+  var me = load('jmpp-presence-me');
+  if (!me || !me.id){
+    var r = function(n){ return Math.floor(Math.random() * n); };
+    me = { id: Date.now().toString(36) + Math.random().toString(36).slice(2, 8),
+           name: FLOWERS[r(FLOWERS.length)], color: COLORS[r(COLORS.length)] };
+    save('jmpp-presence-me', me);
+  }
+
+  /* Section en cours de lecture : le dernier titre passé au-dessus du milieu de l'écran. */
+  var marks = [{ el: document.querySelector('header.hero'), label: 'En-tête' },
+               { el: document.querySelector('.context'), label: 'Le contexte de notre mariage' }];
+  document.querySelectorAll('main section').forEach(function(s){
+    var h = s.querySelector('.section-head h2');
+    if (h) marks.push({ el: s, label: h.textContent.trim(), head: s.querySelector('.section-head') });
+  });
+  marks.push({ el: document.querySelector('footer'), label: 'Contact' });
+  marks = marks.filter(function(m){ return m.el; });
+
+  function currentSection(){
+    var mid = window.innerHeight / 2, cur = marks[0];
+    marks.forEach(function(m){ if (m.el.getBoundingClientRect().top < mid) cur = m; });
+    return cur ? cur.label : '';
+  }
+
+  var root  = document.getElementById('presence');
+  var stack = document.getElementById('presenceStack');
+  var list  = document.getElementById('presenceList');
+
+  function initial(name){ return name.charAt(0).toUpperCase(); }
+  function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;' }[c]; }); }
+  function dot(p, cls){
+    return '<span class="' + cls + '" style="background:' + esc(p.color) + '" title="' + esc(p.name) + '">' + esc(initial(p.name)) + '</span>';
+  }
+
+  var client = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+  var channel = client.channel('fiche-fleuriste-presence', { config: { presence: { key: me.id } } });
+
+  function render(){
+    var state = channel.presenceState(), others = [];
+    Object.keys(state).forEach(function(k){
+      if (k === me.id || !state[k].length) return;
+      others.push(state[k][state[k].length - 1]);
+    });
+
+    document.querySelectorAll('.presence-here').forEach(function(n){ n.remove(); });
+    if (!others.length){ root.hidden = true; return; }
+    root.hidden = false;
+
+    var shown = others.slice(0, 4);
+    stack.innerHTML = shown.map(function(p){ return dot(p, 'presence-dot'); }).join('') +
+      (others.length > shown.length ? '<span class="presence-dot presence-more">+' + (others.length - shown.length) + '</span>' : '');
+    stack.setAttribute('aria-label', others.length === 1 ? '1 autre personne consulte la fiche'
+                                                         : others.length + ' autres personnes consultent la fiche');
+    list.innerHTML = '<p class="presence-title">Également sur la fiche</p>' + others.map(function(p){
+      return '<div class="presence-row">' + dot(p, 'presence-dot presence-dot-sm') +
+             '<span><strong>' + esc(p.name) + '</strong><br><small>' + esc(p.section || '') + '</small></span></div>';
+    }).join('') + '<p class="presence-me">Vous apparaissez comme <strong>' + esc(me.name) + '</strong></p>';
+
+    /* Petits cercles à côté du titre de la section que chacun lit. */
+    marks.forEach(function(m){
+      if (!m.head) return;
+      var here = others.filter(function(p){ return p.section === m.label; });
+      if (!here.length) return;
+      var wrap = document.createElement('span');
+      wrap.className = 'presence-here';
+      wrap.innerHTML = here.map(function(p){ return dot(p, 'presence-dot presence-dot-xs'); }).join('');
+      m.head.appendChild(wrap);
+    });
+  }
+
+  stack.addEventListener('click', function(){
+    var open = root.classList.toggle('is-open');
+    stack.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  document.addEventListener('click', function(e){
+    if (!root.contains(e.target)){ root.classList.remove('is-open'); stack.setAttribute('aria-expanded', 'false'); }
+  });
+
+  var lastSection = null, subscribed = false;
+  function publish(){
+    if (!subscribed) return;
+    var s = currentSection();
+    if (s === lastSection) return;
+    lastSection = s;
+    channel.track({ name: me.name, color: me.color, section: s });
+  }
+
+  channel
+    .on('presence', { event: 'sync' }, render)
+    .subscribe(function(status){
+      if (status === 'SUBSCRIBED'){ subscribed = true; lastSection = null; publish(); }
+    });
+
+  var ticking = false;
+  window.addEventListener('scroll', function(){
+    if (ticking) return;
+    ticking = true;
+    setTimeout(function(){ ticking = false; publish(); }, 400);
+  }, { passive: true });
 })();
 </script>
 </body>
