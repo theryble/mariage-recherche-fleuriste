@@ -699,7 +699,8 @@
     font:700 .78rem/1 'Inter', sans-serif;
   }
   .presence-stack .presence-dot{ margin-left:-6px; }
-  .presence-more{ background:var(--ink-soft); }
+  .presence-self{ box-shadow:0 0 0 2px var(--gold); }
+  .presence-more{ background:var(--ink-soft); color:var(--paper); }
   .presence-dot-sm{ width:28px; height:28px; }
   .presence-dot-xs{ width:20px; height:20px; font-size:.6rem; border-width:1.5px; margin-left:-4px; }
   .presence-list{
@@ -710,6 +711,7 @@
     background:var(--paper-raised);
     box-shadow:var(--shadow);
     font-size:.84rem;
+    max-height:min(360px, calc(100vh - 120px)); overflow-y:auto; overscroll-behavior:contain;
   }
   .presence.is-open .presence-list{ display:block; }
   .presence-title{
@@ -1205,7 +1207,8 @@
   if (!window.supabase) return;
 
   var FLOWERS = ['Pivoine','Rose','Lys','Hortensia','Pensée','Dahlia','Tulipe','Jasmin','Camélia','Iris',
-                 'Glycine','Orchidée','Magnolia','Lavande','Gardénia','Freesia','Anémone','Renoncule','Lilas','Violette'];
+                 'Glycine','Orchidée','Magnolia','Lavande','Gardénia','Freesia','Anémone','Renoncule','Lilas','Violette',
+                 'Coquelicot','Bleuet','Mimosa','Muguet','Edelweiss','Gerbera','Azalée','Bégonia','Capucine','Cosmos'];
   var COLORS  = ['#c98a9c','#a98249','#8fa9ae','#b07fb5','#d08c60','#6f9e7a','#c46a6a','#7d8fc4','#b59a3c','#5f9ea0'];
 
   function load(k){ try { return JSON.parse(localStorage.getItem(k)); } catch(e){ return null; } }
@@ -1252,22 +1255,38 @@
     var state = channel.presenceState(), others = [];
     Object.keys(state).forEach(function(k){
       if (k === me.id || !state[k].length) return;
-      others.push(state[k][state[k].length - 1]);
+      var p = state[k][state[k].length - 1];
+      others.push({ id: k, name: p.name, color: p.color, section: p.section });
     });
 
+    /* Deux visiteurs avec le même nom de fleur : le plus récent en change. */
+    if (others.some(function(p){ return p.name === me.name && p.id < me.id; })){
+      var taken = others.map(function(p){ return p.name; });
+      var free = FLOWERS.filter(function(f){ return taken.indexOf(f) < 0; });
+      me.name = free.length ? free[Math.floor(Math.random() * free.length)] : me.name + ' ' + (others.length + 1);
+      save('jmpp-presence-me', me);
+      lastSection = null; publish();
+    }
+
     document.querySelectorAll('.presence-here').forEach(function(n){ n.remove(); });
-    if (!others.length){ root.hidden = true; return; }
     root.hidden = false;
 
+    /* Votre propre cercle d'abord (toujours affiché), puis celui des autres. */
     var shown = others.slice(0, 4);
-    stack.innerHTML = shown.map(function(p){ return dot(p, 'presence-dot'); }).join('') +
+    stack.innerHTML = dot(me, 'presence-dot presence-self') +
+      shown.map(function(p){ return dot(p, 'presence-dot'); }).join('') +
       (others.length > shown.length ? '<span class="presence-dot presence-more">+' + (others.length - shown.length) + '</span>' : '');
-    stack.setAttribute('aria-label', others.length === 1 ? '1 autre personne consulte la fiche'
-                                                         : others.length + ' autres personnes consultent la fiche');
-    list.innerHTML = '<p class="presence-title">Également sur la fiche</p>' + others.map(function(p){
+    stack.setAttribute('aria-label', !others.length ? 'Vous êtes seul sur la fiche'
+      : others.length === 1 ? '1 autre personne consulte la fiche' : others.length + ' autres personnes consultent la fiche');
+
+    function row(p, label){
       return '<div class="presence-row">' + dot(p, 'presence-dot presence-dot-sm') +
-             '<span><strong>' + esc(p.name) + '</strong><br><small>' + esc(p.section || '') + '</small></span></div>';
-    }).join('') + '<p class="presence-me">Vous apparaissez comme <strong>' + esc(me.name) + '</strong></p>';
+             '<span><strong>' + esc(label) + '</strong><br><small>' + esc(p.section || '') + '</small></span></div>';
+    }
+    list.innerHTML = '<p class="presence-title">Sur la fiche · ' + (others.length + 1) + '</p>' +
+      row({ name: me.name, color: me.color, section: currentSection() }, me.name + ' (vous)') +
+      (others.length ? others.map(function(p){ return row(p, p.name); }).join('')
+                     : '<p class="presence-me">Personne d\'autre pour le moment.</p>');
 
     /* Petits cercles à côté du titre de la section que chacun lit. */
     marks.forEach(function(m){
@@ -1276,7 +1295,8 @@
       if (!here.length) return;
       var wrap = document.createElement('span');
       wrap.className = 'presence-here';
-      wrap.innerHTML = here.map(function(p){ return dot(p, 'presence-dot presence-dot-xs'); }).join('');
+      wrap.innerHTML = here.slice(0, 3).map(function(p){ return dot(p, 'presence-dot presence-dot-xs'); }).join('') +
+        (here.length > 3 ? '<span class="presence-dot presence-dot-xs presence-more">+' + (here.length - 3) + '</span>' : '');
       m.head.appendChild(wrap);
     });
   }
@@ -1303,12 +1323,13 @@
     .subscribe(function(status){
       if (status === 'SUBSCRIBED'){ subscribed = true; lastSection = null; publish(); }
     });
+  render();
 
   var ticking = false;
   window.addEventListener('scroll', function(){
     if (ticking) return;
     ticking = true;
-    setTimeout(function(){ ticking = false; publish(); }, 400);
+    setTimeout(function(){ ticking = false; publish(); render(); }, 400);
   }, { passive: true });
 })();
 </script>
