@@ -433,6 +433,9 @@
   .swatch span{ font-size:.72rem; color:var(--ink-soft); text-align:center; }
 
   /* dress code table */
+  .dress-icons{ display:flex; gap:6px; margin-left:auto; }
+  .dress-glyph{ width:38px; height:38px; border-radius:50%; display:grid; place-items:center; background:var(--gold-tint); color:var(--gold); border:1px solid var(--gold); }
+  .dress-glyph svg{ width:22px; height:22px; }
   .dress-table{ width:100%; border-collapse:collapse; }
   .dress-table th, .dress-table td{
     text-align:left; padding:10px 14px;
@@ -846,7 +849,7 @@
     <div class="section-head"><span class="num">02</span><h2>Dress code &amp; logo</h2></div>
     <div class="cards" style="grid-template-columns: 1.3fr 1fr;">
       <div class="card">
-        <h3>Dress code</h3>
+        <h3>Dress code <span class="dress-icons"><span class="dress-glyph" title="Costume"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M8 3 4 5.5V21h16V5.5L16 3"/><path d="M8 3l4 8 4-8"/><path d="M12 11l-1.2 2.6L12 17l1.2-3.4z"/><path d="M8 3 6.5 9l2.5 1.5"/><path d="M16 3l1.5 6L15 10.5"/><path d="M12 17v4"/></svg></span><span class="dress-glyph" title="Robe de mariée"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9.5 3l.8 3.5L8.6 9.5 5 21h14L15.4 9.5l-1.7-3L14.5 3"/><path d="M10.3 6.5c.6.5 1.1.7 1.7.7s1.1-.2 1.7-.7"/><path d="M8.6 9.5h6.8"/><path d="M10 13.5 8.5 21M14 13.5l1.5 7.5"/></svg></span></span></h3>
         <div class="table-scroll">
         <table class="dress-table">
           <tr><th>Qui</th><th>Couleurs</th></tr>
