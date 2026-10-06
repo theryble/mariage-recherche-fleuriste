@@ -66,7 +66,9 @@ end;
 $$;
 
 revoke all on function public.log_fiche_visit(text, text, text, text, text) from public;
-grant execute on function public.log_fiche_visit(text, text, text, text, text) to anon, authenticated;
+-- Seule la page (clé publique, rôle anon) enregistre des visites : un compte connecté n'en a pas besoin.
+grant execute on function public.log_fiche_visit(text, text, text, text, text) to anon;
+revoke execute on function public.log_fiche_visit(text, text, text, text, text) from authenticated;
 
 -- Les dates sont stockées en heure universelle (UTC), comme partout dans Supabase.
 -- Cette vue les affiche à l'heure de Paris (heure d'été / d'hiver gérée automatiquement) :

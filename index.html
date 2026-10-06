@@ -1214,7 +1214,7 @@
 })();
 </script>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.2/dist/umd/supabase.js" integrity="sha384-Rj26LVGvoeRVR6+mwQmFfcR3QOBEwT+ZmuCWpuiqeTzJpCs0ER4ITAWGb4Hiy3Ok" crossorigin="anonymous"></script>
 <script>
 /* Présence en temps réel (Supabase Realtime Presence, projet dédié à la fiche) :
    chaque visiteur reçoit un nom de fleur et une couleur, et voit les autres personnes
@@ -1285,7 +1285,12 @@
     Object.keys(state).forEach(function(k){
       if (k === me.id || !state[k].length) return;
       var p = state[k][state[k].length - 1];
-      others.push({ id: k, name: p.name, color: p.color, section: p.section });
+      /* Les données des autres visiteurs ne sont pas fiables : on n'affiche que des noms de fleur
+         simples, une des couleurs prévues et une section qui existe sur la page. */
+      if (!p || typeof p.name !== 'string' || !/^[\p{L} ]{1,24}(?: \d{1,3})?$/u.test(p.name)) return;
+      if (COLORS.indexOf(p.color) < 0) return;
+      var section = marks.some(function(m){ return m.label === p.section; }) ? p.section : '';
+      others.push({ id: k, name: p.name, color: p.color, section: section });
     });
 
     /* Deux visiteurs avec le même nom de fleur : le plus récent en change. */
